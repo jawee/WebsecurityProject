@@ -48,6 +48,7 @@ try {
 			<h1>Hello, world!</h1>
 			<p>Some awesome text</p>
 			<p><a class="btn btn-primary btn-lg" href="#">Learn more</a></p>
+			<p>Great success</p>
 		</div>
 	</body>
 </html>
