@@ -50,5 +50,11 @@ try {
 			<p><a class="btn btn-primary btn-lg" href="#">Learn more</a></p>
 			<p>Great success</p>
 		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">Philip ska mygla</div>
+		</div>
+	</div>
 	</body>
 </html>
