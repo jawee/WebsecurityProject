@@ -53,7 +53,7 @@ try {
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">Philip ska mygla</div>
+			<div class="col-sm-12">Philip ska mygla lol</div>
 		</div>
 	</div>
 	</body>
