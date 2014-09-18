@@ -1,5 +1,3 @@
-
---
 -- Table structure for table `Products`
 --
 
@@ -25,5 +23,7 @@ CREATE TABLE `Users` (
   `zipcode` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
