@@ -1,9 +1,12 @@
 <?php
 	require 'includes/database.include.php';
 	require 'templates/head.html';
+	if($_SERVER['REQUEST_METHOD'] == 'POST') {
+		
+	} 
+
 ?>
 	
-<body>
 	<?php
 		require 'templates/navigation.php';
 	?>

@@ -3,7 +3,6 @@
 	require 'templates/head.html';
 ?>
 	
-<body>
 	<?php
 		require 'templates/navigation.php';
 	?>
