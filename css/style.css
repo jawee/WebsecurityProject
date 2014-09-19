@@ -1,0 +1,7 @@
+form[role=register] input+input {
+	margin-top: 10px;
+}
+
+form[role=register] .btn-default {
+	margin-top: 10px;
+}
