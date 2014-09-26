@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	
+
 	require 'includes/database.include.php';
 	require 'templates/head.html';
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -34,5 +34,6 @@
 		</div>
 	</div>
 	
-	</body>
-</html>
+<?php
+	include 'templates/footer.html';
+?>
