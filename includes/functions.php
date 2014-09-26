@@ -13,6 +13,5 @@ function check_login() {
 			return true;
 		}
 	}
-	echo "not set";
 	return false;
 }

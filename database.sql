@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS `Users` (
 `id` int(11) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `salt` varchar(255) NOT NULL,
   `streetAddress` varchar(255) DEFAULT NULL,
   `zipcode` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
