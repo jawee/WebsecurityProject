@@ -1,10 +1,14 @@
 <?php
-	require 'includes/database.include.php';
-	require 'templates/head.html';
-?>
+	session_start();
+	include 'includes/database.include.php';
+	if(check_login() == true) {
+		$loggedIn = true;
+	} else {
+		$loggedIn = false;
+	}
 	
-	<?php
-		require 'templates/navigation.php';
+	include('templates/head.html');
+	include('templates/navigation.php');
 	?>
 	<div class="jumbotron">
 		<div class="container">
@@ -17,8 +21,10 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<?php
-					if(isset($_GET['login'])) {
-						echo "omg some error";
+					if($loggedIn == true) {
+						echo "logged in";
+					} else if(isset($_GET['login'])) {
+						echo "error";
 					}
 				?>
 			</div>

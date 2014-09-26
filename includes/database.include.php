@@ -1,13 +1,11 @@
 <?php
+session_start();
 
 require 'config/database.php';
+require 'includes/functions.php';
 
-$loggedIn = false;
-if(isset($_SESSION['loggedIn'])) {
-	$loggedIn = $_SESSION['loggedIn'];
-}
 try {
-	$dbh = new PDO('mysql:host=localhost;dbname=websecurity', $DB_USERNAME, $DB_PASSWORD);
+	$pdo = new PDO('mysql:host=localhost;dbname=websecurity', $DB_USERNAME, $DB_PASSWORD);
 	$error_message = "Seems like great success";
 } catch (PDOException $e) {
 	$error_message = "Error! " . $e->getMessage();
