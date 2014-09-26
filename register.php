@@ -11,7 +11,7 @@
 	include('templates/navigation.php');
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		
+		echo "trying to register";
 	} 
 
 ?>

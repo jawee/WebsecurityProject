@@ -5,7 +5,7 @@ require 'config/database.php';
 require 'includes/functions.php';
 
 try {
-	$pdo = new PDO('mysql:host=localhost;dbname=' . $DB_DATABASE, $DB_USERNAME, $DB_PASSWORD);
+	$pdo = new PDO('mysql:host=localhost;dbname=' . $DB_NAME, $DB_USERNAME, $DB_PASSWORD);
 	$error_message = "Seems like great success";
 } catch (PDOException $e) {
 	$error_message = "Error! " . $e->getMessage();
