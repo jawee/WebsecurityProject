@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// 	if (password_verify("password", $passHash)) {
+		// 	    echo "pass correct";
+		// 	} else {
+		// 	    echo "pass wrong";
+		// 	}
+		// }
+
 if(isset($_POST['username']) && isset($_POST['password'])) {
 	if($_POST['username'] == "admin" && $_POST['password'] == "password") {
 		$user_agent = "";

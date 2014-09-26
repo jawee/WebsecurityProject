@@ -41,10 +41,6 @@
 			}
 		}
 
-		// echo uniqid();
-		// 	$passHash = password_hash("password", PASSWORD_DEFAULT, array("cost" => 11));
-		// 	echo $passHash;
-
 		// 	if (password_verify("password", $passHash)) {
 		// 	    echo "pass correct";
 		// 	} else {
