@@ -12,11 +12,21 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($pdo)) {
-			$sql = "SELECT * FROM Users WHERE username = '".$_POST['username']."'";
-			if($pdo->query($sql) == true) {
+			try {
+				$username = $_POST['username'];
+				$sql = "SELECT username, password FROM Users WHERE username = :username";
+				$stmt = $pdo->prepare($sql);
+				$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+
+			} catch(PDOException $ex) {
+				var_dump($ex);
+			}
+			if(sizeof($result) > 0) {
 				$error .= "User already exists";
 			} else {
-				$username = $_POST['username'];
 				$password = password_hash($_POST['real-password'], PASSWORD_DEFAULT, array("cost" => 11));
 				$streetAddress = $_POST['street-address'];
 				$zipcode = $_POST['zipcode'];
