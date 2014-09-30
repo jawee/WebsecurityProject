@@ -7,13 +7,12 @@
 		$loggedIn = false;
 	}
 	
-	include('templates/head.html');
-	include('templates/navigation.php');
+
 	$error = "";
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($pdo)) {
-			$sql = "SELECT username FROM users WHERE username = " . $_POST['username'];
+			$sql = "SELECT username FROM Users WHERE username = " . $_POST['username'];
 			if($pdo->query($sql) == true) {
 				$error = "User already exists";
 			} else {
@@ -26,7 +25,7 @@
 
 				// echo $username . " " . $password  . " " . $streetAddress . " " . $zipcode . " " . $city . " " . $country;
 
-				$sql = "INSERT INTO users (username, password, streetaddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
+				$sql = "INSERT INTO Users (username, password, streetaddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
 				$stmt = $pdo->prepare($sql);
 
 				// $stmt->bindParam(':filmName', $_POST['filmName'], PDO::PARAM_STR);
@@ -36,8 +35,10 @@
 				$stmt->bindParam(':zipcode', $zipcode, PDO::PARAM_STR);
 				$stmt->bindParam(':city', $city, PDO::PARAM_STR);
 				$stmt->bindParam(':country', $country, PDO::PARAM_STR);
+				if($stmt->execute() != 1) {
+					$error += "Awfully Sorry, something went wrong";
+				}
 
-				$stmt->execute(); 
 			}
 		}
 
@@ -56,6 +57,8 @@
 ?>
 	
 	<?php
+
+		include('templates/head.html');
 		require 'templates/navigation.php';
 	?>
 	<div class="jumbotron">
