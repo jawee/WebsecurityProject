@@ -12,9 +12,9 @@
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($pdo)) {
-			$sql = "SELECT username FROM Users WHERE username = " . $_POST['username'];
+			$sql = "SELECT * FROM Users WHERE username = '".$_POST['username']."'";
 			if($pdo->query($sql) == true) {
-				$error = "User already exists";
+				$error .= "User already exists";
 			} else {
 				$username = $_POST['username'];
 				$password = password_hash($_POST['real-password'], PASSWORD_DEFAULT, array("cost" => 11));
@@ -36,23 +36,12 @@
 				$stmt->bindParam(':city', $city, PDO::PARAM_STR);
 				$stmt->bindParam(':country', $country, PDO::PARAM_STR);
 				if($stmt->execute() != 1) {
-					$error += "Awfully Sorry, something went wrong";
+					$error .= "Awfully Sorry, something went wrong";
 				}
 
 			}
 		}
-
-		// echo uniqid();
-		// 	$passHash = password_hash("password", PASSWORD_DEFAULT, array("cost" => 11));
-		// 	echo $passHash;
-
-		// 	if (password_verify("password", $passHash)) {
-		// 	    echo "pass correct";
-		// 	} else {
-		// 	    echo "pass wrong";
-		// 	}
-		// }
-	} 
+	}
 
 ?>
 	
