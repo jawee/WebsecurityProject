@@ -6,10 +6,13 @@ include 'includes/database.include.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$sql = 'SELECT * FROM Users WHERE username = "'.$username.'"';
+//sql injection fungerar med "test'; delete from Users where 1 or username = '"
+$sql = "SELECT * FROM Users WHERE username = '".$username."'";
 
 $sth = $pdo->query($sql);
-$result = $sth->fetchAll();
+if($sth != false) {
+	$result = $sth->fetchAll();	
+}
 
 if(sizeof($result) < 1) {
 	header("Location: /?login=error");
