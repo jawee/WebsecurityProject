@@ -16,10 +16,10 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<?php
-					if($loggedIn == true) {
-						echo "logged in";
-					} else if(isset($_GET['login'])) {
-						echo "error";
+					if(isset($_GET['login'])) {
+						?>
+							<script>alert("Wrong username and/or password");</script>
+						<?php
 					}
 				?>
 				<table class="table table-hover">
@@ -28,8 +28,8 @@
   							<th>Image</th>
   							<th>Name</th>
   							<th>Description</th>
-  							<th>Quantity</th>
   							<th>Stock</th>
+  							<th>Price</th>
   							<th></th>
   						</tr>
   					</thead>
@@ -43,8 +43,8 @@
 									<td><?php echo $row['productname']; ?></td>
 									<td><?php echo $row['description']; ?></td>
 									<td><?php echo $row['stock']; ?></td>
-									<td><?php echo $row['price']; ?></td>
-									<td><button class="btn btn-default" id="<?php echo $row['id']; ?>">Add to cart</button></td>
+									<td><?php echo $row['price'].' $'; ?></td>
+									<td><a href="add_to_cart.php?id=<?php echo $row['id'];?>" class="btn btn-default" id="<?php echo $row['id']; ?>">Add to cart</a></td>
 								</tr>
 								<?php
 							}

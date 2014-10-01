@@ -13,6 +13,14 @@
 			<?php } else { ?>
 			<a class="navbar-brand" href="#">Logged in as: <?php echo $_SESSION['username']; ?></a>
 			<form class="navbar-form navbar-right">
+				<?php 
+					if(!isset($_SESSION['shopping_cart'])) {
+						echo "The shopping cart is empty";
+					} else {
+						echo "Current cost: " . get_shopping_cart_value($pdo). " $  ";
+						echo '<a href="checkout.php" class="btn btn-default">Checkout</a>';
+					}
+				?>
 				<a href="logout.php" type="submit" class="btn btn-danger">Log Out</a>
 			</form>
 			<?php } ?>
