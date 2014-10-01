@@ -37,7 +37,7 @@ if(sizeof($result) < 1) {
 		}
 		$_SESSION['username'] = $_POST['username'];
 		$_SESSION['login_string'] = hash('sha512', "password" . $user_agent); 
-		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		header('Location: /');
 	} else {
 		header("Location: /?login=error");
 	}
