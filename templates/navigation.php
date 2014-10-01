@@ -11,7 +11,7 @@
 				<a href="register.php" type="submit" class="btn btn-default">Register</a>
 			</form>
 			<?php } else { ?>
-			<a class="navbar-brand" href="#">Logged in as: <?php echo $_SESSION['username']; ?></a>
+			<a class="navbar-brand" href="/">Logged in as: <?php echo $_SESSION['username']; ?></a>
 			<form class="navbar-form navbar-right">
 				<?php 
 					if(!isset($_SESSION['shopping_cart'])) {
