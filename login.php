@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include 'includes/database.include.php';
 
 $username = $_POST['username'];

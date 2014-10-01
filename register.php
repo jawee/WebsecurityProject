@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	include 'includes/database.include.php';
 	if(check_login() == true) {
 		$loggedIn = true;

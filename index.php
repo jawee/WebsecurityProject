@@ -1,11 +1,6 @@
 <?php
-	session_start();
 	include 'includes/database.include.php';
-	if(check_login() == true) {
-		$loggedIn = true;
-	} else {
-		$loggedIn = false;
-	}
+	$loggedIn = check_login();
 	
 	include('templates/head.html');
 	include('templates/navigation.php');
@@ -27,6 +22,19 @@
 						echo "error";
 					}
 				?>
+				<table class="table">
+  					<thead>
+  						<tr>
+  							<th>Name</th>
+  							<th>Description</th>
+  							<th>Quantity</th>
+  							<th>Price</th>
+  						</tr>
+  					</thead>
+  					<tbody>
+						
+  					</tbody>
+				</table>	
 			</div>
 		</div>
 	</div>
