@@ -9,8 +9,8 @@
 	if(!isset($_SESSION['shopping_cart'])) {
 		header('Location: /');
 	}
-	
-	include('templates/head.html');
+	$pageName = "View Cart";
+	include('templates/head.php');
 	include('templates/navigation.php');
 	?>
 	<div class="jumbotron">
@@ -22,9 +22,10 @@
 		<div class="row">
 			<div class="col-sm-12">
 				
-				<table class="table table-hover">
+				<table class="table table-hover table-striped">
   					<thead>
   						<tr>
+  							<th>Image</th>
   							<th>Name</th>
   							<th>Price</th>
   							<th>Count</th>
@@ -42,6 +43,7 @@
 								?>
 
 								<tr>
+									<td><img src="images/<?php echo $row[0]['image']; ?>" style="max-height: 50px; max-width: 50px;"></td>
 									<td><?php echo $row[0]['productname']; ?></td>
 									<td><?php echo $row[0]['price'].' $'; ?></td>
 									<td><?php echo $row['count']; ?></td>
@@ -52,7 +54,13 @@
 							}
 						?>
   					</tbody>
-				</table>	
+				</table>
+				<?php
+					if(get_shopping_cart_value($pdo) != 0) {
+						echo '<a href="checkout.php" class="btn btn-success">Checkout</a>	';
+					}
+				?>
+				
 			</div>
 		</div>
 	</div>

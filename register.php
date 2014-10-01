@@ -55,8 +55,8 @@
 ?>
 	
 	<?php
-
-		include('templates/head.html');
+		$pageName = "Register";
+		include('templates/head.php');
 		require 'templates/navigation.php';
 	?>
 	<div class="jumbotron">

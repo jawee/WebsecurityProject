@@ -1,15 +1,14 @@
 <?php
 	include 'includes/database.include.php';
 	$loggedIn = check_login();
-	
-	include('templates/head.html');
+	$pageName = "Start";	
+	include('templates/head.php');
 	include('templates/navigation.php');
 	?>
+
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Hello, world!</h1>
-			<p>Some awesome text</p>
-			<p><a class="btn btn-primary btn-lg" href="#">Learn more</a></p>
+			<h1>Super awesome fruit shop</h1>
 		</div>
 	</div>
 	<div class="container">
@@ -22,7 +21,7 @@
 						<?php
 					}
 				?>
-				<table class="table table-hover">
+				<table class="table table-hover table-striped">
   					<thead>
   						<tr>
   							<th>Image</th>

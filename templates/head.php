@@ -4,6 +4,6 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<title></title>
+	<title>Webshop - <?php echo $pageName; ?></title>
 </head>
 <body>

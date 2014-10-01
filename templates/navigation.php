@@ -15,10 +15,12 @@
 			<form class="navbar-form navbar-right">
 				<?php 
 					if(!isset($_SESSION['shopping_cart'])) {
-						echo "The shopping cart is empty";
+						echo "Current cost: 0 $  ";
 					} else {
 						echo "Current cost: " . get_shopping_cart_value($pdo). " $  ";
-						echo '<a href="checkout.php" class="btn btn-default">Checkout</a>';
+						if(get_shopping_cart_value($pdo) != 0) {
+							echo '<a href="view_cart.php" class="btn btn-default">View Cart</a>';
+						}
 					}
 				?>
 				<a href="logout.php" type="submit" class="btn btn-danger">Log Out</a>
