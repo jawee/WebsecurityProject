@@ -57,7 +57,8 @@
 				</table>
 				<?php
 					if(get_shopping_cart_value($pdo) != 0) {
-						echo '<a href="checkout.php" class="btn btn-success">Checkout</a>	';
+						echo 'Sum of costs: '.get_shopping_cart_value($pdo).' $';
+						echo '<a href="checkout.php" class="pull-right btn btn-success">Checkout</a>	';
 					}
 				?>
 				
