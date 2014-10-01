@@ -2,6 +2,6 @@ form[role=register] input+input {
 	margin-top: 10px;
 }
 
-form[role=register] .btn-default {
+form[role=register] .btn-danger, form[role=credit-card] .btn-danger {
 	margin-top: 10px;
 }

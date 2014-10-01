@@ -1,9 +1,9 @@
 <?php
 	include 'includes/database.include.php';
-	if(check_login() == true) {
-		$loggedIn = true;
-	} else {
-		$loggedIn = false;
+	$loggedIn = check_login();
+	if($loggedIn) {
+		header('Location: /');
+		die();
 	}
 	
 
@@ -76,7 +76,7 @@
 					<input class="form-control" type="text" name="zipcode" placeholder="Zip Code">
 					<input class="form-control" type="text" name="city" placeholder="City">
 					<input class="form-control" type="text" name="country" placeholder="Country">
-					<button type="submit" class="btn btn-default">Register</button>
+					<button type="submit" class="btn btn-danger pull-right">Register</button>
 				</form>
 			</div>
 		</div>

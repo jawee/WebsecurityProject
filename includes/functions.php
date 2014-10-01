@@ -15,6 +15,20 @@ function check_login() {
 	return false;
 }
 
+function get_user_info($pdo) {
+	$username = $_SESSION['username'];
+	$sql = "SELECT username, streetAddress, zipcode, city, country FROM Users WHERE username = :username LIMIT 1";
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	if(sizeof($result) == 0) {
+		die();
+	}
+
+	return $result;
+}
+
 function fetch_products($pdo) {
 	$stmt = $pdo->prepare("select * from Products");
 	$stmt->execute();
