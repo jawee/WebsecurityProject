@@ -1,6 +1,12 @@
 <?php
 include('includes/database.include.php');
 
+$isLoggedIn = check_login();
+if(!$isLoggedIn) {
+	header('Location: /');
+	die();
+}
+
 $id = -1;
 if(isset($_GET['id'])) {
 	$id = $_GET['id'];
