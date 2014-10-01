@@ -42,7 +42,7 @@
 						$result = get_user_info($pdo);
 						?>
 
-						<h3>Receipt</h3>
+						<h1>Receipt</h1>
 						<address>
 							<strong><?php echo $result[0]['username']; ?></strong><br>
 							<?php echo $result[0]['streetAddress']; ?><br>
