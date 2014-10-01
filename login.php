@@ -1,15 +1,38 @@
 <?php
 session_start();
 
-// 	if (password_verify("password", $passHash)) {
-		// 	    echo "pass correct";
-		// 	} else {
-		// 	    echo "pass wrong";
-		// 	}
-		// }
+include 'includes/database.include.php';
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-	if($_POST['username'] == "admin" && $_POST['password'] == "password") {
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+//sql injection fungerar med "test'; delete from Users where 1 or username = '"
+$sql = "SELECT username, password FROM Users WHERE username = '".$username."'";
+
+$sth = $pdo->query($sql);
+if($sth != false) {
+	$result = $sth->fetchAll();	
+}
+
+// try {
+// 	//REAL STUFF
+// 	$sql = "SELECT username, password FROM Users WHERE username = :username";
+// 	$stmt = $pdo->prepare($sql);
+// 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+// 	$stmt->execute();
+// 	$result = $stmt->fetchAll();
+
+// } catch(PDOException $ex) {
+// 	var_dump($ex);
+// }
+
+
+if(sizeof($result) < 1) {
+	header("Location: /?login=error");
+} else {
+	$fetched_password = $result[0]['password'];
+	if(password_verify($password, $fetched_password)) {
 		$user_agent = "";
 		if(isset($_SESSION['HTTP_USER_AGENT'])) {
 			$user_agent = $_SESSION['HTTP_USER_AGENT'];
@@ -21,4 +44,6 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 		header("Location: /?login=error");
 	}
 }
+
+
 ?>

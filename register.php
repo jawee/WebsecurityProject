@@ -7,17 +7,26 @@
 		$loggedIn = false;
 	}
 	
-	include('templates/head.html');
-	include('templates/navigation.php');
+
 	$error = "";
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if(isset($pdo)) {
-			$sql = "SELECT username FROM users WHERE username = " . $_POST['username'];
-			if($pdo->query($sql) == true) {
-				$error = "User already exists";
-			} else {
+			try {
 				$username = $_POST['username'];
+				$sql = "SELECT username, password FROM Users WHERE username = :username";
+				$stmt = $pdo->prepare($sql);
+				$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+				$stmt->execute();
+				$result = $stmt->fetchAll();
+
+			} catch(PDOException $ex) {
+				var_dump($ex);
+			}
+			if(sizeof($result) > 0) {
+				$error .= "User already exists";
+			} else {
 				$password = password_hash($_POST['real-password'], PASSWORD_DEFAULT, array("cost" => 11));
 				$streetAddress = $_POST['street-address'];
 				$zipcode = $_POST['zipcode'];
@@ -26,7 +35,7 @@
 
 				// echo $username . " " . $password  . " " . $streetAddress . " " . $zipcode . " " . $city . " " . $country;
 
-				$sql = "INSERT INTO users (username, password, streetaddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
+				$sql = "INSERT INTO Users (username, password, streetaddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
 				$stmt = $pdo->prepare($sql);
 
 				// $stmt->bindParam(':filmName', $_POST['filmName'], PDO::PARAM_STR);
@@ -36,22 +45,19 @@
 				$stmt->bindParam(':zipcode', $zipcode, PDO::PARAM_STR);
 				$stmt->bindParam(':city', $city, PDO::PARAM_STR);
 				$stmt->bindParam(':country', $country, PDO::PARAM_STR);
+				if($stmt->execute() != 1) {
+					$error .= "Awfully Sorry, something went wrong";
+				}
 
-				$stmt->execute(); 
 			}
 		}
-
-		// 	if (password_verify("password", $passHash)) {
-		// 	    echo "pass correct";
-		// 	} else {
-		// 	    echo "pass wrong";
-		// 	}
-		// }
-	} 
+	}
 
 ?>
 	
 	<?php
+
+		include('templates/head.html');
 		require 'templates/navigation.php';
 	?>
 	<div class="jumbotron">
