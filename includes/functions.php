@@ -14,3 +14,10 @@ function check_login() {
 	}
 	return false;
 }
+
+function fetch_products($pdo) {
+	$stmt = $pdo->prepare("select * from Products");
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+	return $result;
+}

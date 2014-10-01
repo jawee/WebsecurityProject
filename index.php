@@ -22,17 +22,33 @@
 						echo "error";
 					}
 				?>
-				<table class="table">
+				<table class="table table-hover">
   					<thead>
   						<tr>
+  							<th>Image</th>
   							<th>Name</th>
   							<th>Description</th>
   							<th>Quantity</th>
-  							<th>Price</th>
+  							<th>Stock</th>
+  							<th></th>
   						</tr>
   					</thead>
   					<tbody>
-						
+						<?php
+							$result = fetch_products($pdo);
+							foreach ($result as $row) {
+								?>
+								<tr>
+									<td><img src="images/<?php echo $row['image']; ?>" style="max-height: 100px; max-width: 100px;"></td>
+									<td><?php echo $row['productname']; ?></td>
+									<td><?php echo $row['description']; ?></td>
+									<td><?php echo $row['stock']; ?></td>
+									<td><?php echo $row['price']; ?></td>
+									<td><button class="btn btn-default" id="<?php echo $row['id']; ?>">Add to cart</button></td>
+								</tr>
+								<?php
+							}
+						?>
   					</tbody>
 				</table>	
 			</div>
