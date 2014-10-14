@@ -40,7 +40,7 @@ if(sizeof($result) < 1) {
 	$stmtAttempts->execute();
 	$resultAttempts = $stmtAttempts->fetch();
 	$attempts = $resultAttempts['attempts'];
-	if($attempts > 4) {
+	if(isset($attempts) && $attempts > 4) {
 		header("Location: /?login=blocked");
 	} else {
 		$fetched_password = $result[0]['password'];
@@ -62,8 +62,7 @@ if(sizeof($result) < 1) {
 			$stmt->bindParam(':userId', $id);
 			$stmt->execute();
 			$result = $stmt->fetch();
-
-			if(sizeof($result) > 0) {
+			if($result != false && sizeof($result) > 0) {
 				// UPDATE Customers SET ContactName='Alfred Schmidt', City='Hamburg' WHERE CustomerName='Alfreds Futterkiste';
 				$attempts = $result['attempts'] + 1;
 				$sql = "UPDATE LoginAttempts SET attempts = :attempts WHERE userId = :userId";
@@ -78,6 +77,7 @@ if(sizeof($result) < 1) {
 					header("Location: /?login=error");
 				}
 			} else {
+
 				$sql = "INSERT INTO LoginAttempts (userId, attempts) VALUES (:userId, 1)";
 				$stmt = $pdo->prepare($sql);
 				$stmt->bindParam(':userId', $id);
