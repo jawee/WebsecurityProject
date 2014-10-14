@@ -17,8 +17,10 @@
 				<?php
 					if(isset($_GET['login'])) {
 						if($_GET['login'] == "blocked") {
+							echo "FFS";
 							?> <script>alert("Your user has been blocked, too many password attempts");</script> <?
 						} else {
+							echo "FFS FFS";
 							?>
 							<script>alert("Wrong username and/or password");</script>
 							<?php
