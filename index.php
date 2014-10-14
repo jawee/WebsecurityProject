@@ -16,9 +16,14 @@
 			<div class="col-sm-12">
 				<?php
 					if(isset($_GET['login'])) {
-						?>
+						if($_GET['login'] == "blocked") {
+							?> <script>alert("Your user has been blocked, too many password attempts");</script> <?
+						} else {
+							?>
 							<script>alert("Wrong username and/or password");</script>
-						<?php
+							<?php
+						}
+						
 					}
 				?>
 				<table class="table table-hover table-striped">

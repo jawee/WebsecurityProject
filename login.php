@@ -18,7 +18,7 @@ $password = $_POST['password'];
 //Korrekt inloggning
 try {
 	
-	$sql = "SELECT username, password FROM Users WHERE username = :username";
+	$sql = "SELECT id, username, password FROM Users WHERE username = :username";
 	$stmt = $pdo->prepare($sql);
 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 
@@ -33,6 +33,7 @@ try {
 if(sizeof($result) < 1) {
 	header("Location: /?login=error");
 } else {
+	$id = $result[0]['id'];
 	$fetched_password = $result[0]['password'];
 	if(password_verify($password, $fetched_password)) {
 		$user_agent = "";
@@ -41,9 +42,40 @@ if(sizeof($result) < 1) {
 		}
 		$_SESSION['username'] = $_POST['username'];
 		$_SESSION['login_string'] = hash('sha512', "password" . $user_agent); 
+		$sql = "UPDATE LoginAttempts SET attempts = 0 WHERE userId = :userId";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindparam(':userId', $id);
+		$stmt->execute();
 		header('Location: /');
 	} else {
-		header("Location: /?login=error");
+		$sql = "SELECT attempts FROM LoginAttempts WHERE userId = :userId";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':userId', $id);
+		$stmt->execute();
+		$result = $stmt->fetch();
+
+		if(sizeof($result) > 0) {
+			// UPDATE Customers SET ContactName='Alfred Schmidt', City='Hamburg' WHERE CustomerName='Alfreds Futterkiste';
+			$attempts = $result['attempts'] + 1;
+			$sql = "UPDATE LoginAttempts SET attempts = :attempts WHERE userId = :userId";
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam(':attempts', $attempts);
+			$stmt->bindparam(':userId', $id);
+			$stmt->execute();
+
+			if($attempts > 4) {
+				header("Location: /?login=blocked");
+			} else {
+				header("Location: /?login=error");
+			}
+		} else {
+			$sql = "INSERT INTO LoginAttempts (userId, attempts) VALUES (:userId, 1)";
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam(':userId', $id);
+			$stmt->execute();
+			header("Location: /?login=error");
+		}
+		
 	}
 }
 
