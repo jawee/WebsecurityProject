@@ -38,7 +38,7 @@ LoginAttempts
 | userId   | int(11) | NO   | PRI | NULL    |       |
 | attempts | int(11) | NO   |     | NULL    |       |
 +----------+---------+------+-----+---------+-------+
-````
+```
 
 How to use:
 
