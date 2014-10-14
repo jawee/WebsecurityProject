@@ -32,12 +32,15 @@
 				$city = $_POST['city'];
 				$country = $_POST['country'];
 
-				// echo $username . " " . $password  . " " . $streetAddress . " " . $zipcode . " " . $city . " " . $country;
+				//Unsafe	
+				// $sql = "INSERT INTO Users (username, password, streetAddress, zipcode, city, country) VALUES ('$username', '$password', '$streetAddress', '$zipcode', '$city', '$country')";
 
-				$sql = "INSERT INTO Users (username, password, streetaddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
+				// if($pdo->exec($sql) == false) {
+				// 	$error .= "Something went wrong";
+				// }
+
+				$sql = "INSERT INTO Users (username, password, streetAddress, zipcode, city, country) VALUES (:username, :password, :streetaddress, :zipcode, :city, :country)";
 				$stmt = $pdo->prepare($sql);
-
-				// $stmt->bindParam(':filmName', $_POST['filmName'], PDO::PARAM_STR);
 				$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 				$stmt->bindParam(':password', $password, PDO::PARAM_STR);
 				$stmt->bindParam(':streetaddress', $streetAddress, PDO::PARAM_STR);

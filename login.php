@@ -4,26 +4,30 @@ include 'includes/database.include.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+
+//Dålig inloggning
 //sql injection fungerar med "test'; delete from Users where 1 or username = '"
-$sql = "SELECT username, password FROM Users WHERE username = '".$username."'";
+// $sql = "SELECT username, password FROM Users WHERE username = '".$username."'";
 
-$sth = $pdo->query($sql);
-if($sth != false) {
-	$result = $sth->fetchAll();	
-}
-
-// try {
-// 	//REAL STUFF
-// 	$sql = "SELECT username, password FROM Users WHERE username = :username";
-// 	$stmt = $pdo->prepare($sql);
-// 	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
-
-// 	$stmt->execute();
-// 	$result = $stmt->fetchAll();
-
-// } catch(PDOException $ex) {
-// 	var_dump($ex);
+// $sth = $pdo->query($sql);
+// if($sth != false) {
+// 	$result = $sth->fetchAll();	
 // }
+
+
+//Korrekt inloggning
+try {
+	
+	$sql = "SELECT username, password FROM Users WHERE username = :username";
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+	$stmt->execute();
+	$result = $stmt->fetchAll();
+
+} catch(PDOException $ex) {
+	var_dump($ex);
+}
 
 
 if(sizeof($result) < 1) {
