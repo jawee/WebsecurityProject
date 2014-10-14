@@ -45,9 +45,9 @@
 						<h1>Receipt</h1>
 						<address>
 							<strong><?php echo $result[0]['username']; ?></strong><br>
-							<?php echo $result[0]['streetAddress']; ?><br>
-							<?php echo $result[0]['city']; ?>, <?php echo $result[0]['zipcode']; ?><br>
-							<?php echo $result[0]['country']; ?> 
+							<?php echo htmlspecialchars($result[0]['streetAddress']); ?><br>
+							<?php echo htmlspecialchars($result[0]['city']); ?>, <?php echo htmlspecialchars($result[0]['zipcode']); ?><br>
+							<?php echo htmlspecialchars($result[0]['country']); ?> 
 						</address>
 						<table class="table table-hover table-striped">
 	  					<thead>
@@ -69,11 +69,11 @@
 									?>
 
 									<tr>
-										<td><img src="images/<?php echo $row[0]['image']; ?>" style="max-height: 50px; max-width: 50px;"></td>
-										<td><?php echo $row[0]['productname']; ?></td>
-										<td><?php echo $row[0]['price'].' $'; ?></td>
-										<td><?php echo $row['count']; ?></td>
-										<td><?php echo $row['count']*$row[0]['price'].' $'; ?></td>
+										<td><img src="images/<?php echo htmlspecialchars($row[0]['image']); ?>" style="max-height: 50px; max-width: 50px;"></td>
+										<td><?php echo htmlspecialchars($row[0]['productname']); ?></td>
+										<td><?php echo htmlspecialchars($row[0]['price'].' $'); ?></td>
+										<td><?php echo htmlspecialchars($row['count']); ?></td>
+										<td><?php echo htmlspecialchars($row['count']*$row[0]['price'].' $'); ?></td>
 									</tr>
 									<?php
 								}
