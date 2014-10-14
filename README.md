@@ -29,3 +29,11 @@ Products
 | stock       | int(11)      | YES  |     | NULL    |                |
 +-------------+--------------+------+-----+---------+----------------+
 ```
+
+How to use:
+
+Copy file config/database.default.php to config/database.php. Edit and add database information.
+
+Import database.sql into your database.
+
+Done.
