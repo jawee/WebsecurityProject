@@ -30,6 +30,16 @@ Products
 +-------------+--------------+------+-----+---------+----------------+
 ```
 
+LoginAttempts
+```
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| userId   | int(11) | NO   | PRI | NULL    |       |
+| attempts | int(11) | NO   |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+````
+
 How to use:
 
 Copy file config/database.default.php to config/database.php. Edit and add database information.
