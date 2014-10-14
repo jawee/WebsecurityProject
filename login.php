@@ -4,6 +4,10 @@ include 'includes/database.include.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+if($_SESSION['request-token'] != $_POST['csrf']) {
+	header("Location: /");
+}
+
 
 //Dålig inloggning
 //sql injection fungerar med "test'; delete from Users where 1 or username = '"

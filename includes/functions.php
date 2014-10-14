@@ -69,3 +69,7 @@ function get_shopping_cart_items($pdo) {
 
 	return $products;
 }
+
+function getRandomString($length = 10) {
+	return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+}

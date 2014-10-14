@@ -10,6 +10,10 @@
 	$error = "";
 
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
+		if($_POST['csrf'] != $_SESSION['request-token']) {
+			header('Location: /');
+			die();
+		}
 		if(isset($pdo)) {
 			try {
 				$username = $_POST['username'];
@@ -49,6 +53,8 @@
 				$stmt->bindParam(':country', $country, PDO::PARAM_STR);
 				if($stmt->execute() != 1) {
 					$error .= "Awfully Sorry, something went wrong";
+				} else {
+					header('Location: /?registrationSuccess');
 				}
 
 			}
@@ -61,6 +67,8 @@
 		$pageName = "Register";
 		include('templates/head.php');
 		require 'templates/navigation.php';
+		$randomString = getRandomString();
+		$_SESSION['request-token'] = $randomString;
 	?>
 	<div class="jumbotron">
 		<div class="container">
@@ -79,6 +87,7 @@
 					<input class="form-control" type="text" name="zipcode" placeholder="Zip Code">
 					<input class="form-control" type="text" name="city" placeholder="City">
 					<input class="form-control" type="text" name="country" placeholder="Country">
+					<input type="hidden" name="csrf" value="<?php echo $randomString; ?>">
 					<button type="submit" class="btn btn-danger pull-right">Register</button>
 				</form>
 			</div>

@@ -14,16 +14,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<?php
-					if(isset($_GET['login'])) {
-						if($_GET['login'] == "blocked") {
-							echo '<script>alert("Your user has been blocked, too many password attempts");</script>';
-						} else {
-							echo '<script>alert("Wrong username and/or password");</script>';
-						}
-						
-					}
-				?>
 				<table class="table table-hover table-striped">
   					<thead>
   						<tr>
@@ -46,7 +36,7 @@
 									<td><?php echo $row['description']; ?></td>
 									<td><?php echo $row['stock']; ?></td>
 									<td><?php echo $row['price'].' $'; ?></td>
-									<td><a href="add_to_cart.php?id=<?php echo $row['id'];?>" class="btn btn-default" id="<?php echo $row['id']; ?>">Add to cart</a></td>
+									<td><?php if($loggedIn) { ?><a href="add_to_cart.php?id=<?php echo $row['id'];?>" class="btn btn-default" id="<?php echo $row['id']; ?>">Add to cart</a><?php } ?></td>
 								</tr>
 								<?php
 							}
@@ -56,6 +46,19 @@
 			</div>
 		</div>
 	</div>
-<?php
-	include 'templates/footer.html';
-?>
+	<?php
+		include 'templates/footer.html';
+	?>
+	<?php
+		if(isset($_GET['login'])) {
+			if($_GET['login'] == "blocked") {
+				echo '<script>alert("Your user has been blocked, too many password attempts");</script>';
+			} else {
+				echo '<script>alert("Wrong username and/or password");</script>';
+			}
+		}
+		if(isset($_GET['registrationSuccess'])) {
+			echo '<script>alert("Successfully registered");</script>';
+		}
+	?>
+

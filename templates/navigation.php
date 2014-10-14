@@ -1,11 +1,15 @@
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
 			
-			<?php if(!$loggedIn) { ?>
+			<?php if(!$loggedIn) { 
+				$randomString = getRandomString();
+				$_SESSION['request-token'] = $randomString;
+			?>
 			<form class="navbar-form navbar-right" method="post" role="login" action="login.php">
 				<div class="form-group">
 					<input type="text" name="username" class="form-control" placeholder="Username">
 					<input type="password" name="password" class="form-control" placeholder="Password">
+					<input type="hidden" name="csrf" value="<?php echo $randomString; ?>">
 				</div>			
 				<button type="submit" class="btn btn-default">Login</button>
 				<a href="register.php" type="submit" class="btn btn-default">Register</a>
